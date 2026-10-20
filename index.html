@@ -9,230 +9,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            color-scheme: light;
-            --navy: #102a56;
-            --cream: #f7f5ef;
-            --paper: #fffefa;
-            --yellow: #f4c542;
-            --ink: #1c2635;
-            --muted: #68717e;
-            --line: #e8e7df;
-            --serif: "Playfair Display", Georgia, serif;
-            --sans: "DM Sans", Arial, sans-serif;
-        }
-
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-        body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-        a { color: inherit; text-decoration: none; }
-        button { font: inherit; }
-        .wrap { width: min(1140px, calc(100% - 48px)); margin-inline: auto; }
-
-        .topbar { background: var(--navy); color: #e5eaf2; font-size: 12px; }
-        .topbar-inner { min-height: 37px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-        .topbar-note { display: flex; align-items: center; gap: 9px; }
-        .topbar-note span { color: var(--yellow); font-size: 15px; }
-        .topbar-link { color: var(--yellow); font-weight: 700; letter-spacing: .03em; }
-
-        .site-header { position: sticky; top: 0; z-index: 10; background: rgba(255, 254, 250, .96); border-bottom: 1px solid rgba(232, 231, 223, .85); backdrop-filter: blur(12px); }
-        .nav-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-        .brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; }
-        .brand-mark { width: 43px; height: 43px; display: grid; place-items: center; background: var(--navy); border-radius: 13px; color: var(--yellow); }
-        .brand-mark svg { width: 25px; height: 25px; }
-        .brand-name { display: block; font-family: var(--serif); font-size: 16px; line-height: 1.1; font-weight: 700; }
-        .brand-subtitle { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
-        .nav-links { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { color: #465166; font-size: 13px; font-weight: 600; transition: color .2s ease; }
-        .nav-links a:hover { color: #8c6800; }
-        .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 0 20px; border: 0; border-radius: 7px; background: var(--navy); color: #fff; font-size: 13px; font-weight: 700; transition: transform .2s ease, background .2s ease; }
-        .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #1d4177; }
-        .nav-cta { min-height: 42px; padding-inline: 17px; }
-        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--navy); cursor: pointer; }
-        .menu-toggle svg { width: 21px; height: 21px; }
-
-        .hero { position: relative; overflow: hidden; padding: 82px 0 76px; background: var(--cream); }
-        .hero::before { position: absolute; top: -195px; right: -138px; width: 500px; height: 500px; border: 1px solid rgba(16, 42, 86, .08); border-radius: 50%; content: ""; }
-        .hero::after { position: absolute; top: -130px; right: -75px; width: 370px; height: 370px; border: 1px solid rgba(16, 42, 86, .07); border-radius: 50%; content: ""; }
-        .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr .91fr; align-items: center; gap: 64px; }
-        .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #8c6800; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-        .eyebrow::before { width: 23px; height: 1px; background: #d5aa20; content: ""; }
-        h1, h2, h3, p { margin-top: 0; }
-        h1 { max-width: 580px; margin: 19px 0 18px; color: var(--navy); font-family: var(--serif); font-size: clamp(42px, 5vw, 66px); font-weight: 600; letter-spacing: -.045em; line-height: 1.08; }
-        h1 em { color: #9a7400; font-weight: 600; }
-        .hero-copy { max-width: 490px; margin-bottom: 27px; color: #647169; font-size: 15px; line-height: 1.85; }
-        .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; }
-        .button svg { width: 16px; height: 16px; }
-        .button-outline { border: 1px solid #d9dde5; background: transparent; color: var(--navy); }
-        .button-outline:hover { background: #fff; color: var(--navy); }
-        .hero-proof { display: flex; align-items: center; gap: 13px; margin-top: 29px; }
-        .avatar-stack { display: flex; padding-left: 4px; }
-        .avatar-stack span { width: 30px; height: 30px; display: grid; place-items: center; margin-left: -5px; border: 2px solid var(--cream); border-radius: 50%; background: #d9a77d; color: #fff; font-size: 9px; font-weight: 700; }
-        .avatar-stack span:nth-child(2) { background: #7384a1; }
-        .avatar-stack span:nth-child(3) { background: #c58363; }
-        .avatar-stack span:nth-child(4) { background: #526c99; }
-        .proof-text { color: var(--muted); font-size: 11px; line-height: 1.6; }
-        .proof-text strong { color: var(--ink); }
-        .hero-visual { position: relative; min-height: 405px; }
-        .hero-image { position: absolute; inset: 0 18px 17px 25px; overflow: hidden; border-radius: 46% 46% 12px 12px; background: #d8dce3; }
-        .hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
-        .image-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16, 42, 86, .02) 45%, rgba(16, 42, 86, .24)); }
-        .photo-note { position: absolute; bottom: 43px; left: 0; display: flex; align-items: center; gap: 11px; padding: 12px 16px; border: 1px solid rgba(255, 255, 255, .7); border-radius: 8px; background: rgba(255, 254, 250, .96); box-shadow: 0 10px 30px rgba(26, 40, 30, .1); }
-        .note-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 7px; background: #fff6d7; color: var(--navy); }
-        .note-icon svg { width: 19px; height: 19px; }
-        .photo-note strong, .photo-note small { display: block; }
-        .photo-note strong { font-size: 11px; }
-        .photo-note small { margin-top: 3px; color: var(--muted); font-size: 10px; }
-        .hero-spark { position: absolute; top: 48px; right: 0; width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #ead68b; border-radius: 50%; background: #fff8dd; color: #9a7400; font-size: 23px; }
-
-        .values-strip { border-bottom: 1px solid var(--line); background: var(--paper); }
-        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-        .value-item { display: flex; align-items: center; gap: 14px; padding: 25px 24px; }
-        .value-item:first-child { padding-left: 0; }
-        .value-item + .value-item { border-left: 1px solid var(--line); }
-        .value-icon { width: 40px; height: 40px; display: grid; flex-shrink: 0; place-items: center; border-radius: 10px; background: #edf1f8; color: var(--navy); }
-        .value-icon svg { width: 20px; height: 20px; }
-        .value-item strong { display: block; font-size: 12px; }
-        .value-item small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
-
-        .section { padding: 88px 0; }
-        .section-heading { max-width: 620px; margin: 0 auto 39px; text-align: center; }
-        .section-heading .eyebrow { justify-content: center; }
-        h2 { margin: 13px 0 12px; color: var(--navy); font-family: var(--serif); font-size: clamp(31px, 3.7vw, 43px); font-weight: 600; letter-spacing: -.03em; line-height: 1.16; }
-        .section-heading p { margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
-        .programs { background: #fff; }
-        .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 19px; }
-        .program-card { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; transition: transform .2s ease, box-shadow .2s ease; }
-        .program-card:hover { transform: translateY(-4px); box-shadow: 0 16px 35px rgba(16, 37, 30, .08); }
-        .program-photo { height: 190px; overflow: hidden; background: #e8e9e1; }
-        .program-photo img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .3s ease; }
-        .program-card:hover .program-photo img { transform: scale(1.04); }
-        .program-body { padding: 21px 21px 20px; }
-        .program-level { color: #8c6800; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-        .program-body h3 { margin: 8px 0 8px; color: var(--navy); font-family: var(--serif); font-size: 20px; }
-        .program-body p { min-height: 43px; margin-bottom: 16px; color: var(--muted); font-size: 12px; line-height: 1.75; }
-        .text-link { display: inline-flex; align-items: center; gap: 7px; color: #23477f; font-size: 11px; font-weight: 700; }
-        .text-link svg { width: 14px; height: 14px; transition: transform .2s ease; }
-        .text-link:hover svg { transform: translateX(3px); }
-
-        .about { overflow: hidden; background: var(--navy); color: #fff; }
-        .about-grid { display: grid; grid-template-columns: .92fr 1fr; align-items: center; gap: 75px; }
-        .about-visual { position: relative; min-height: 380px; }
-        .about-photo { position: absolute; inset: 0 0 0 25px; overflow: hidden; border-radius: 10px; background: #52617a; }
-        .about-photo img { width: 100%; height: 100%; display: block; object-fit: cover; }
-        .about-photo::after { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(16, 37, 30, .33)); content: ""; }
-        .about-badge { position: absolute; bottom: 24px; left: 0; display: flex; align-items: center; gap: 10px; padding: 13px 15px; border-radius: 8px; background: #fffefa; color: var(--ink); box-shadow: 0 10px 25px rgba(0, 0, 0, .12); }
-        .badge-star { color: #9a7400; font-size: 20px; }
-        .about-badge strong, .about-badge small { display: block; }
-        .about-badge strong { font-size: 11px; }
-        .about-badge small { margin-top: 3px; color: var(--muted); font-size: 10px; }
-        .about-copy .eyebrow { color: var(--yellow); }
-        .about-copy h2 { color: #fff; }
-        .about-copy > p { margin: 0 0 23px; color: #cbd4e1; font-size: 13px; line-height: 1.9; }
-        .about-points { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 21px; margin-bottom: 27px; }
-        .about-point { display: flex; align-items: flex-start; gap: 9px; color: #e9edf5; font-size: 11px; line-height: 1.6; }
-        .check { width: 17px; height: 17px; display: grid; flex-shrink: 0; place-items: center; margin-top: 1px; border-radius: 50%; background: rgba(244, 197, 66, .16); color: var(--yellow); font-size: 11px; }
-        .button-gold { background: var(--yellow); color: var(--navy); }
-        .button-gold:hover { background: #ffda68; color: var(--navy); }
-
-        .admissions { padding: 72px 0; background: #f3f2eb; }
-        .admissions-inner { display: flex; align-items: center; justify-content: space-between; gap: 35px; }
-        .admissions-copy { max-width: 610px; }
-        .admissions-copy h2 { margin: 12px 0 8px; font-size: clamp(29px, 3vw, 37px); }
-        .admissions-copy p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
-        .admissions-actions { display: flex; flex-shrink: 0; align-items: center; gap: 10px; }
-
-        .footer { padding: 43px 0 21px; background: #0a1b37; color: #e1e7f0; }
-        .footer-main { display: flex; align-items: flex-start; justify-content: space-between; gap: 35px; padding-bottom: 31px; }
-        .footer .brand-name { color: #fff; }
-        .footer .brand-subtitle { color: #a7b3c7; }
-        .footer-about { max-width: 300px; margin: 16px 0 0; color: #b0bbcd; font-size: 11px; line-height: 1.8; }
-        .footer-nav { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 12px; }
-        .footer-nav a { color: #e1e7f0; font-size: 11px; }
-        .footer-nav a:hover { color: var(--yellow); }
-        .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .12); color: #a1aec2; font-size: 10px; }
-
-        @media (max-width: 900px) {
-            .nav-links { gap: 17px; }
-            .hero-grid { gap: 35px; }
-            .hero-visual { min-height: 360px; }
-            .about-grid { gap: 42px; }
-            .about-visual { min-height: 350px; }
-        }
-        @media (max-width: 720px) {
-            .wrap { width: min(100% - 36px, 540px); }
-            .topbar-inner { min-height: 34px; font-size: 10px; }
-            .nav-inner { min-height: 68px; }
-            .menu-toggle { display: grid; place-items: center; }
-            .nav-cta { display: none; }
-            .nav-links { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 8px 18px 15px; border-bottom: 1px solid var(--line); background: var(--paper); }
-            .nav-links.is-open { display: flex; flex-direction: column; }
-            .nav-links a { padding: 12px 3px; }
-            .hero { padding: 58px 0 54px; }
-            .hero-grid { grid-template-columns: 1fr; gap: 37px; }
-            h1 { max-width: 500px; font-size: clamp(42px, 11vw, 59px); }
-            .hero-copy { font-size: 14px; }
-            .hero-visual { min-height: min(82vw, 390px); }
-            .hero-image { inset: 0 10px 12px 20px; }
-            .hero-spark { right: -1px; }
-            .values-grid { grid-template-columns: 1fr; padding-block: 7px; }
-            .value-item, .value-item:first-child { padding: 13px 0; }
-            .value-item + .value-item { border-top: 1px solid var(--line); border-left: 0; }
-            .value-icon { width: 36px; height: 36px; }
-            .section { padding: 67px 0; }
-            .section-heading { margin-bottom: 28px; }
-            .program-grid { grid-template-columns: 1fr; gap: 14px; }
-            .program-photo { height: 220px; }
-            .program-body p { min-height: 0; }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .about-visual { min-height: min(80vw, 365px); }
-            .about-photo { left: 18px; }
-            .about-points { gap: 13px 12px; }
-            .admissions { padding: 57px 0; }
-            .admissions-inner { align-items: flex-start; flex-direction: column; gap: 23px; }
-            .footer-main { flex-direction: column; gap: 23px; }
-            .footer-nav { gap: 17px; padding-top: 0; }
-        }
-        @media (max-width: 420px) {
-            .wrap { width: calc(100% - 30px); }
-            .topbar-note { gap: 6px; }
-            .brand-mark { width: 39px; height: 39px; }
-            .brand-name { font-size: 15px; }
-            .hero-actions { align-items: stretch; flex-direction: column; }
-            .hero-actions .button { width: 100%; }
-            .about-points { grid-template-columns: 1fr; }
-            .admissions-actions { align-items: stretch; flex-direction: column; width: 100%; }
-            .admissions-actions .button { width: 100%; }
-            .footer-bottom { flex-direction: column; gap: 7px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="topbar">
         <div class="wrap topbar-inner">
             <div class="topbar-note"><span aria-hidden="true">✦</span> A place to learn, grow, and find your purpose</div>
-            <a class="topbar-link" href="#admissions">Admissions information <span aria-hidden="true">→</span></a>
+            <a class="topbar-link" href="admissions.html">Admissions information <span aria-hidden="true">→</span></a>
         </div>
     </div>
     <header class="site-header">
         <div class="wrap nav-inner">
-            <a class="brand" href="#home" aria-label="Destiny Foundation School home">
+            <a class="brand" href="index.html" aria-label="Destiny Foundation School home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5V5.8c0-.5.4-.8.9-.6l7.1 3 7.1-3c.5-.2.9.1.9.6v13.7c0 .5-.4.8-.9.6l-7.1-3-7.1 3c-.5.2-.9-.1-.9-.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 8.2v9.1" stroke="currentColor" stroke-width="1.6"/></svg>
                 </span>
                 <span><span class="brand-name">Destiny Foundation</span><span class="brand-subtitle">School</span></span>
             </a>
             <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
-                <a href="#home">Home</a>
-                <a href="#about">About us</a>
-                <a href="#programs">Learning</a>
-                <a href="#admissions">Admissions</a>
+                <a href="index.html" aria-current="page">Home</a>
+                <a href="about.html">About us</a>
+                <a href="learning.html">Learning</a>
+                <a href="admissions.html">Admissions</a>
             </nav>
-            <a class="nav-cta" href="#admissions">Explore admissions <span aria-hidden="true">→</span></a>
+            <a class="nav-cta" href="admissions.html">Explore admissions <span aria-hidden="true">→</span></a>
             <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-navigation">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             </button>
@@ -240,9 +40,10 @@
     </header>
 
     <main>
-        <section class="hero" id="home">
-            <div class="wrap hero-grid">
-                <div class="hero-content">
+        <section class="hero" id="home" aria-label="Destiny Foundation School highlights" aria-roledescription="carousel">
+            <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3" aria-hidden="false">
+                <img src="pictures/classroom.jpg" alt="Students learning together in a bright classroom" fetchpriority="high">
+                <div class="wrap hero-content">
                     <span class="eyebrow">Welcome to Destiny Foundation School</span>
                     <h1>Where every learner finds their <em>bright future.</em></h1>
                     <p class="hero-copy">A caring school community where curiosity is encouraged, character is nurtured, and every student is inspired to reach their full potential.</p>
@@ -250,21 +51,46 @@
                         <a class="button" href="#admissions">Discover our school <span aria-hidden="true">→</span></a>
                         <a class="button button-outline" href="#programs">Explore learning</a>
                     </div>
-                    <div class="hero-proof">
-                        <div class="avatar-stack" aria-hidden="true"><span>DF</span><span>ST</span><span>LE</span><span>+</span></div>
-                        <div class="proof-text"><strong>A community that cares</strong><br>Growing together, every day</div>
+                </div>
+            </div>
+            <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true" inert>
+                <img src="pictures/early-learning.jpg" alt="A young student discovering new things through play" loading="lazy">
+                <div class="wrap hero-content">
+                    <span class="eyebrow">Learning at Destiny</span>
+                    <h1>Curiosity today. <em>Confidence for life.</em></h1>
+                    <p class="hero-copy">From first discoveries to new challenges, our students learn in a supportive environment that helps every ability shine.</p>
+                    <div class="hero-actions">
+                        <a class="button" href="#programs">Explore our learning</a>
+                        <a class="button button-outline" href="#about">What makes us different</a>
                     </div>
                 </div>
-                <div class="hero-visual" aria-label="Students learning together">
-                    <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Students learning together in a bright classroom" fetchpriority="high">
-                        <div class="image-tint"></div>
+            </div>
+            <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true" inert>
+                <img src="pictures/student-project.jpg" alt="Students working together on a classroom project" loading="lazy">
+                <div class="wrap hero-content">
+                    <span class="eyebrow">Growing together</span>
+                    <h1>A strong start for <em>every stage.</em></h1>
+                    <p class="hero-copy">With caring teachers and a close partnership with families, we help children build the skills and purpose to shape their future.</p>
+                    <div class="hero-actions">
+                        <a class="button" href="#admissions">Join our community</a>
+                        <a class="button button-outline" href="#about">Meet Destiny</a>
                     </div>
-                    <div class="hero-spark" aria-hidden="true">✳</div>
-                    <div class="photo-note">
-                        <span class="note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.4 5.2L20 10l-4 3.8.9 5.6-4.9-2.8-4.9 2.8.9-5.6L4 10l5.6-1.8L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
-                        <span><strong>Made for curious minds</strong><small>Learning with care and purpose</small></span>
-                    </div>
+                </div>
+            </div>
+            <div class="wrap hero-controls">
+                <div class="hero-control-group">
+                    <button class="hero-control" type="button" data-slide="previous" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="hero-control" type="button" data-slide="next" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+                <div class="hero-pagination" aria-label="Choose a slide">
+                    <button class="hero-dot" type="button" data-slide-index="0" aria-label="Show slide 1" aria-current="true"></button>
+                    <button class="hero-dot" type="button" data-slide-index="1" aria-label="Show slide 2" aria-current="false"></button>
+                    <button class="hero-dot" type="button" data-slide-index="2" aria-label="Show slide 3" aria-current="false"></button>
+                    <button class="hero-control hero-pause" type="button" data-slide="pause" aria-label="Pause slideshow" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
                 </div>
             </div>
         </section>
@@ -295,7 +121,7 @@
                 </div>
                 <div class="program-grid">
                     <article class="program-card">
-                        <div class="program-photo"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Young child exploring a learning activity" loading="lazy"></div>
+                        <div class="program-photo"><img src="pictures/early-learning.jpg" alt="Young child exploring a learning activity" loading="lazy"></div>
                         <div class="program-body">
                             <span class="program-level">Early years</span>
                             <h3>Curiosity takes root</h3>
@@ -304,7 +130,7 @@
                         </div>
                     </article>
                     <article class="program-card">
-                        <div class="program-photo"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Teacher helping students in a classroom" loading="lazy"></div>
+                        <div class="program-photo"><img src="pictures/classroom.jpg" alt="Teacher helping students in a classroom" loading="lazy"></div>
                         <div class="program-body">
                             <span class="program-level">Primary learning</span>
                             <h3>Confidence to grow</h3>
@@ -313,7 +139,7 @@
                         </div>
                     </article>
                     <article class="program-card">
-                        <div class="program-photo"><img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Students collaborating on a classroom project" loading="lazy"></div>
+                        <div class="program-photo"><img src="pictures/student-project.jpg" alt="Students collaborating on a classroom project" loading="lazy"></div>
                         <div class="program-body">
                             <span class="program-level">Future ready</span>
                             <h3>Prepared for possibility</h3>
@@ -328,7 +154,7 @@
         <section class="section about" id="about">
             <div class="wrap about-grid">
                 <div class="about-visual">
-                    <div class="about-photo"><img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Students sharing a positive moment at school" loading="lazy"></div>
+                    <div class="about-photo"><img src="pictures/school-community.jpg" alt="Students sharing a positive moment at school" loading="lazy"></div>
                     <div class="about-badge"><span class="badge-star" aria-hidden="true">✦</span><span><strong>Room to become</strong><small>Inspired to learn. Ready to grow.</small></span></div>
                 </div>
                 <div class="about-copy">
@@ -365,17 +191,17 @@
         <div class="wrap">
             <div class="footer-main">
                 <div>
-                    <a class="brand" href="#home" aria-label="Destiny Foundation School home">
+                    <a class="brand" href="index.html" aria-label="Destiny Foundation School home">
                         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5V5.8c0-.5.4-.8.9-.6l7.1 3 7.1-3c.5-.2.9.1.9.6v13.7c0 .5-.4.8-.9.6l-7.1-3-7.1 3c-.5.2-.9-.1-.9-.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 8.2v9.1" stroke="currentColor" stroke-width="1.6"/></svg></span>
                         <span><span class="brand-name">Destiny Foundation</span><span class="brand-subtitle">School</span></span>
                     </a>
                     <p class="footer-about">A caring learning community inspiring students to grow with confidence, curiosity, and purpose.</p>
                 </div>
                 <nav class="footer-nav" aria-label="Footer navigation">
-                    <a href="#about">About us</a>
-                    <a href="#programs">Learning</a>
-                    <a href="#admissions">Admissions</a>
-                    <a href="#home">Back to top ↑</a>
+                    <a href="about.html">About us</a>
+                    <a href="learning.html">Learning</a>
+                    <a href="admissions.html">Admissions</a>
+                    <a href="index.html">Home</a>
                 </nav>
             </div>
             <div class="footer-bottom"><span>© <span id="year">2026</span> Destiny Foundation School</span><span>Learn with purpose. Grow with confidence.</span></div>
@@ -384,6 +210,65 @@
     <script>
         const menuButton = document.querySelector(".menu-toggle");
         const navigation = document.querySelector("#main-navigation");
+        const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
+        const heroDots = Array.from(document.querySelectorAll(".hero-dot"));
+        const heroPauseButton = document.querySelector(".hero-pause");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let activeHeroSlide = 0;
+        let heroTimer;
+        let isHeroPaused = reducedMotion.matches;
+
+        if (isHeroPaused) {
+            heroPauseButton.setAttribute("aria-pressed", "true");
+            heroPauseButton.setAttribute("aria-label", "Start slideshow");
+            heroPauseButton.firstElementChild.textContent = "▶";
+        }
+
+        function showHeroSlide(index) {
+            activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+            heroSlides.forEach((slide, slideIndex) => {
+                const isActive = slideIndex === activeHeroSlide;
+                slide.classList.toggle("is-active", isActive);
+                slide.setAttribute("aria-hidden", String(!isActive));
+                slide.inert = !isActive;
+                heroDots[slideIndex].setAttribute("aria-current", String(isActive));
+            });
+        }
+
+        function updateHeroAutoplay() {
+            window.clearInterval(heroTimer);
+            if (!isHeroPaused && !document.hidden) {
+                heroTimer = window.setInterval(() => showHeroSlide(activeHeroSlide + 1), 6000);
+            }
+        }
+
+        document.querySelector(".hero-controls").addEventListener("click", (event) => {
+            const control = event.target.closest("button");
+            if (!control) return;
+
+            if (control.dataset.slide === "previous") showHeroSlide(activeHeroSlide - 1);
+            if (control.dataset.slide === "next") showHeroSlide(activeHeroSlide + 1);
+            if (control.dataset.slideIndex !== undefined) showHeroSlide(Number(control.dataset.slideIndex));
+            if (control.dataset.slide === "pause") {
+                isHeroPaused = !isHeroPaused;
+                control.setAttribute("aria-pressed", String(isHeroPaused));
+                control.setAttribute("aria-label", isHeroPaused ? "Start slideshow" : "Pause slideshow");
+                control.firstElementChild.textContent = isHeroPaused ? "▶" : "Ⅱ";
+            }
+            updateHeroAutoplay();
+        });
+
+        document.addEventListener("visibilitychange", updateHeroAutoplay);
+        reducedMotion.addEventListener("change", (event) => {
+            if (event.matches) {
+                isHeroPaused = true;
+                heroPauseButton.setAttribute("aria-pressed", "true");
+                heroPauseButton.setAttribute("aria-label", "Start slideshow");
+                heroPauseButton.firstElementChild.textContent = "▶";
+            }
+            updateHeroAutoplay();
+        });
+        updateHeroAutoplay();
 
         menuButton.addEventListener("click", () => {
             const isExpanded = menuButton.getAttribute("aria-expanded") === "true";

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102a56">
+    <meta name="description" content="Learn about the caring community, values, and approach at Destiny Foundation School.">
+    <title>About Us | Destiny Foundation School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="topbar">
+        <div class="wrap topbar-inner">
+            <div class="topbar-note"><span aria-hidden="true">✦</span> A place to learn, grow, and find your purpose</div>
+            <a class="topbar-link" href="admissions.html">Admissions information <span aria-hidden="true">→</span></a>
+        </div>
+    </div>
+    <header class="site-header">
+        <div class="wrap nav-inner">
+            <a class="brand" href="index.html" aria-label="Destiny Foundation School home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5V5.8c0-.5.4-.8.9-.6l7.1 3 7.1-3c.5-.2.9.1.9.6v13.7c0 .5-.4.8-.9.6l-7.1-3-7.1 3c-.5.2-.9-.1-.9-.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 8.2v9.1" stroke="currentColor" stroke-width="1.6"/></svg>
+                </span>
+                <span><span class="brand-name">Destiny Foundation</span><span class="brand-subtitle">School</span></span>
+            </a>
+            <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html" aria-current="page">About us</a>
+                <a href="learning.html">Learning</a>
+                <a href="admissions.html">Admissions</a>
+            </nav>
+            <a class="nav-cta" href="admissions.html">Explore admissions <span aria-hidden="true">→</span></a>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-navigation">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+    </header>
+    <main>
+        <section class="page-intro">
+            <div class="wrap">
+                <span class="eyebrow">About Destiny</span>
+                <h1>A community where every learner belongs</h1>
+                <p>We bring students, families, and teachers together to create a caring place where children can grow with confidence and purpose.</p>
+            </div>
+        </section>
+        <section class="page-content">
+            <div class="wrap">
+                <div class="page-copy">
+                    <span class="eyebrow">Our approach</span>
+                    <h2>Growing curious, capable, and kind learners</h2>
+                    <p>At Destiny Foundation School, learning is built on strong relationships. Our teachers get to know each student, encourage questions, and make room for different strengths and ways of learning.</p>
+                    <p>We work in partnership with families so students feel supported at school and at home. Together, we help them build the knowledge, character, and confidence to take their next steps.</p>
+                </div>
+                <div class="page-cards">
+                    <article class="page-card">
+                        <h3>A safe community</h3>
+                        <p>Every student deserves to feel welcomed, respected, and encouraged to do their best.</p>
+                    </article>
+                    <article class="page-card">
+                        <h3>Learning with purpose</h3>
+                        <p>Meaningful learning helps students connect new ideas to the world around them.</p>
+                    </article>
+                    <article class="page-card">
+                        <h3>Families as partners</h3>
+                        <p>Open communication helps us support each learner and celebrate their progress.</p>
+                    </article>
+                </div>
+                <div class="page-actions">
+                    <a class="button" href="learning.html">Explore our learning <span aria-hidden="true">→</span></a>
+                    <a class="button button-gold" href="admissions.html">Join our community</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-main">
+                <div>
+                    <a class="brand" href="index.html" aria-label="Destiny Foundation School home">
+                        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5V5.8c0-.5.4-.8.9-.6l7.1 3 7.1-3c.5-.2.9.1.9.6v13.7c0 .5-.4.8-.9.6l-7.1-3-7.1 3c-.5.2-.9-.1-.9-.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 8.2v9.1" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                        <span><span class="brand-name">Destiny Foundation</span><span class="brand-subtitle">School</span></span>
+                    </a>
+                    <p class="footer-about">A caring learning community helping every student grow with confidence, curiosity, and purpose.</p>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="about.html">About us</a><a href="learning.html">Learning</a><a href="admissions.html">Admissions</a><a href="index.html">Home</a>
+                </nav>
+            </div>
+            <div class="footer-bottom"><span>© <span class="year"></span> Destiny Foundation School</span><span>Learn with purpose. Grow with confidence.</span></div>
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.querySelector(".menu-toggle");
+        const navigation = document.querySelector("#main-navigation");
+        menuButton.addEventListener("click", () => {
+            const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+            menuButton.setAttribute("aria-expanded", String(!isExpanded));
+            menuButton.setAttribute("aria-label", isExpanded ? "Open navigation menu" : "Close navigation menu");
+            navigation.classList.toggle("is-open", !isExpanded);
+        });
+        navigation.addEventListener("click", (event) => {
+            if (event.target.closest("a")) {
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Open navigation menu");
+                navigation.classList.remove("is-open");
+            }
+        });
+        document.querySelector(".year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
